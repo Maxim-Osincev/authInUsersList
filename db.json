@@ -1,0 +1,79 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "login": "user1",
+      "mail": "user1@mail.ru",
+      "code": "user1",
+      "password": "user1",
+      "contacts": [
+        {
+          "name": "MAKSIM OSINCEV",
+          "surname": "OSINCEV",
+          "number": "353119",
+          "comment": ""
+        },
+        {
+          "name": "MAKSIM ",
+          "surname": "OSINCEV",
+          "number": "321",
+          "comment": ""
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "login": "user2",
+      "mail": "user2@mail.ru",
+      "code": "user2",
+      "password": "user2",
+      "contacts": [
+        {
+          "name": "Имя1",
+          "surname": "Фамилия1",
+          "number": "88015551234",
+          "comment": "Комментарий1"
+        },
+        {
+          "name": "Имя2",
+          "surname": "Фамилия2",
+          "number": "88015552222",
+          "comment": "Комментарий2"
+        },
+        {
+          "name": "Имя3",
+          "surname": "Фамилия3",
+          "number": "88015554321",
+          "comment": "Комментарий3"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "login": "user3",
+      "mail": "user3@mail.ru",
+      "code": "user3",
+      "password": "user3",
+      "contacts": [
+        {
+          "name": "Имя1",
+          "surname": "Фамилия1",
+          "number": "88015551234",
+          "comment": "Комментарий1"
+        },
+        {
+          "name": "Имя2",
+          "surname": "Фамилия2",
+          "number": "88015552222",
+          "comment": "Комментарий2"
+        },
+        {
+          "name": "Имя3",
+          "surname": "Фамилия3",
+          "number": "88015554321",
+          "comment": "Комментарий3"
+        }
+      ]
+    }
+  ]
+}

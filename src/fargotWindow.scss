@@ -1,0 +1,76 @@
+$white: #ffffff;
+$black: #000000;
+$orange: #F5C548;
+
+
+
+
+.fargot_window{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #00000080;
+    overflow: hidden;
+}
+.fargot_window_form{
+    position: relative;
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $orange;
+    border-radius: 15px;
+    padding: 15px;
+    background: #fff;
+    gap: 15px;
+}
+.fargot_window_title{
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.fargot_window_text{
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(156, 156, 156);
+    outline: none;
+    font-size: 16px;
+
+    &:focus{
+        border: 1px solid $orange;
+    }
+}
+.fargot_window_button{
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background: $orange;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover{
+        transform: translate(0, -1px);
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 5px $orange;
+    }
+}
+.fargot_window-close{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
+    transform: rotate(45deg);
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover{
+        color: $orange;
+        transition: all 0.2s ease;
+    }
+}
