@@ -8,7 +8,13 @@
       "password": "user1",
       "contacts": [
         {
-          "name": "MAKSIM",
+          "name": "MAKSIM OSINCEV",
+          "surname": "OSINCEV",
+          "number": "353119",
+          "comment": ""
+        },
+        {
+          "name": "MAKSIM ",
           "surname": "OSINCEV",
           "number": "321",
           "comment": ""
@@ -68,14 +74,6 @@
           "comment": "Комментарий3"
         }
       ]
-    },
-    {
-      "id": 4,
-      "login": "user6",
-      "mail": "user6@list.ru",
-      "code": "user6",
-      "password": "user6",
-      "contacts": []
     }
   ]
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types'
 import "./registerWindow.scss";
+import { registerOnAction, registerOffAction } from '../store/registerReducer.jsx';
 
 function RegisterWindow(props){
 
@@ -12,7 +13,7 @@ function RegisterWindow(props){
     return(
         <div className="register_window">
             <form className="register_window_form">
-                <div onClick={() => props.setDataAuth(false)} className="register_window-close">+</div>
+                <div onClick={() => props.setDataAuth(registerOffAction())} className="register_window-close">+</div>
                 <div className="register_window_title">Регистрация</div>
                 <input type="text" name="login" placeholder="Логин" className="register_window_input register_window_login _req" />
                 <input type="text" name="mail" placeholder="E-mail" className="register_window_input register_window_mail _req" />

@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import "./auth.scss";
-import FargotWindow from "./FargotWindow.jsx";
-import RegisterWindow from "./RegisterWindow.jsx";
+import FargotWindow from "../fargotWindow/FargotWindow.jsx";
+import RegisterWindow from "../registerWindow/RegisterWindow.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { registerOnAction, registerOffAction } from '../store/registerReducer.jsx';
+import { forgotPasswordOnAction, forgotPasswordOffAction } from '../store/forgotPasswordReducer.jsx';
 
 function Auth(props) {
-  let [forgot, setPassword] = useState(false);
-  let [registred, setDataAuth] = useState(false);
+  let forgot = useSelector(state => state.forgotPassword);
+  let registred = useSelector(state => state.registred);
+  let dispatch = useDispatch();
   let url = `http://localhost:3000/users/`;
 
   function forgotPassword() {
@@ -28,7 +32,7 @@ function Auth(props) {
         });
         if (password) {
           alert(`Пароль: ${password}`);
-          setPassword((prev) => (prev = !prev));
+          dispatch(forgotPasswordOffAction());
         } else {
           alert("Проверьте правильность логина и секретного кода.");
         }
@@ -71,7 +75,7 @@ function Auth(props) {
             .then(response => response.json())
             .then(data => {
               alert('Регистрация прошла успешно.')
-              setDataAuth((prev) => (prev = !prev));
+              dispatch(registerOffAction());
             })
         });
     }
@@ -79,16 +83,16 @@ function Auth(props) {
 
   return (
     <div className="auth">
-      {forgot ? (
+      {forgot.forgotPassword ? (
         <FargotWindow
-          setPassword={setPassword}
+          setPassword={dispatch}
           forgotPassword={forgotPassword}
         />
       ) : (
         false
       )}
-      {registred ? (
-        <RegisterWindow setDataAuth={setDataAuth} register={register} />
+      {registred.registred ? (
+        <RegisterWindow setDataAuth={dispatch} register={register} />
       ) : (
         false
       )}
@@ -114,12 +118,12 @@ function Auth(props) {
         </form>
         <div className="auth__user_footer">
           <span>
-            <a onClick={() => setPassword((prev) => (prev = !prev))} href="#">
+            <a onClick={() => dispatch(forgotPasswordOnAction())} href="#">
               Забыли пароль?
             </a>
           </span>
           <span>
-            <a onClick={() => setDataAuth((prev) => (prev = !prev))} href="#">
+            <a onClick={() => dispatch(registerOnAction())} href="#">
               Регистрация
             </a>
           </span>

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types'
-import './editContact.scss'
+import PropTypes from 'prop-types';
+import './editContact.scss';
+import { activeAddContactAction, inactiveAddContactAction, contactEditTrueAction, contactEditFalseAction, selectedContactEditTrueAction, selectedContactEditFalseAction } from '../store/listContactsReducer.jsx';
 
 function EditContact(props){
     let [name, setName] = useState(document.querySelectorAll('.contacts__list-row')[props.selectedContactEdit].querySelector('.contacts__list-name').textContent);
@@ -47,14 +48,14 @@ function EditContact(props){
                         .then(data => props.getData())
                 }));
 
-                props.setEditContact(false)
+                props.setEditContact(contactEditFalseAction())
         }
     }
 
     return (
         <div className="edit_contact_window">
             <form className="edit_contact_window-form">
-                <div onClick={() => props.setEditContact(false)} className="edit_contact_window-close">+</div>
+                <div onClick={() => props.setEditContact(contactEditFalseAction())} className="edit_contact_window-close">+</div>
                 <div className="edit_contact_window-title">Изменить контакт</div>
                 <input name="name" placeholder="Имя" type="text" className="edit_contact_window-name edit_contact_window-input _req" value={name} onChange={e => setName(e.target.value)}/>
                 <input name="surname" placeholder="Фамилия" type="text" className="edit_contact_window-surname edit_contact_window-input _req" value={surname} onChange={e => setSurname(e.target.value)}/>

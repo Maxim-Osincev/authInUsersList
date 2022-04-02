@@ -1,12 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import "./app.scss";
-import Auth from './Auth.jsx';
-import ListContacts from './ListContacts.jsx';
+import Auth from './auth/Auth.jsx';
+import ListContacts from './listContacts/ListContacts.jsx';
+import { useDispatch, useSelector } from "react-redux";
+import { authOnAction, authOffAction } from './store/authReducer.jsx';
 
 function App() {
 
-  let [auth, setAuth] = useState(false);  
-  let [activeUserId, setUser] = useState(null);  
+  let auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   function verifyData(e){
     e.preventDefault();
@@ -35,8 +37,7 @@ function App() {
           data.forEach(elem => {
           if(elem.login === authForm.get('login') && elem.password === authForm.get('password')){
             coincidences++
-            setAuth(true);
-            setUser(elem.id);
+            dispatch(authOnAction(elem.id));
           }
         }) 
         if(coincidences === 0){
@@ -46,13 +47,12 @@ function App() {
   }
 
   function authOut(){
-    setAuth(false);
-    setUser(null);
+    dispatch(authOffAction());
   }
 
-  if(auth && activeUserId){
+  if(auth.auth && auth.userId){
     return (
-      <ListContacts authOut={authOut} activeUserId={activeUserId}/>
+      <ListContacts authOut={authOut} activeUserId={auth.userId}/>
     )
   } else{
     return <Auth verifyData={verifyData} />

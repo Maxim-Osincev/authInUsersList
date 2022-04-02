@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import './addContact.scss'
+import { activeAddContactAction, inactiveAddContactAction, contactEditTrueAction, contactEditFalseAction, selectedContactEditTrueAction, selectedContactEditFalseAction } from '../store/listContactsReducer.jsx'
 
 function AddContact(props){
 
@@ -48,14 +49,14 @@ function AddContact(props){
     
     
             //Закрываем окно добавления контакта
-            props.addContact(false);
+            props.addContact(inactiveAddContactAction());
         }
     }
 
     return (
         <div className="add_contact_window">
             <form className="add_contact_window-form">
-                <div onClick={() => props.addContact(false)} className="add_contact_window-close">+</div>
+                <div onClick={() => props.addContact(inactiveAddContactAction())} className="add_contact_window-close">+</div>
                 <div className="add_contact_window-title">Добавить контакт</div>
                 <input name="name" placeholder="Имя" type="text" className="add_contact_window-name add_contact_window-input _req"></input>
                 <input name="surname" placeholder="Фамилия" type="text" className="add_contact_window-surname add_contact_window-input _req"></input>

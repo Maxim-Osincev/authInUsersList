@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types'
 import "./fargotWindow.scss";
+import { forgotPasswordOnAction, forgotPasswordOffAction } from '../store/forgotPasswordReducer.jsx';
 
 function FargotWindow(props){
 
@@ -12,7 +13,7 @@ function FargotWindow(props){
     return(
         <div className="fargot_window">
             <form className="fargot_window_form">
-                <div onClick={() => props.setPassword(false)} className="fargot_window-close">+</div>
+                <div onClick={() => props.setPassword(forgotPasswordOffAction())} className="fargot_window-close">+</div>
                 <div className="fargot_window_title">Восстановление пароля</div>
                 <input name="mail" placeholder="E-mail" className="fargot_window_text fargot_window_mail" />
                 <input name="code" placeholder="Секретный код" className="fargot_window_text fargot_window_code" />

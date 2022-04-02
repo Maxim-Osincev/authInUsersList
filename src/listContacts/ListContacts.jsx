@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import PropTypes from 'prop-types';
 import "./listContacts.scss";
-import AddContact from "./AddContact.jsx";
-import EditContact from "./EditContact.jsx";
+import AddContact from "../addContact/AddContact.jsx";
+import EditContact from "../editContact/EditContact.jsx";
+import { contactsListAction, activeAddContactAction, inactiveAddContactAction, contactEditTrueAction, contactEditFalseAction, selectedContactEditTrueAction, selectedContactEditFalseAction } from '../store/listContactsReducer.jsx'
+import { useSelector, useDispatch } from "react-redux";
 
 function ListContacts(props) {
-  let [listContacts, toggleContacts] = useState({});
-  let [contact, addContact] = useState(false);
-  let [contactEdit, setEditContact] = useState(false);
-  let [selectedContactEdit, setSelectedContactEdit] = useState(null);
+  let listContacts = useSelector(state => state.listContacts.listContacts);
+  let contact = useSelector(state => state.listContacts.addContact);
+  let contactEdit = useSelector(state => state.listContacts.contactEdit);
+  let selectedContactEdit = useSelector(state => state.listContacts.selectedContactEdit);
+
+  const dispatch = useDispatch();
 
   let url = "http://localhost:3000/users";
 
@@ -18,7 +22,7 @@ function ListContacts(props) {
       .then((data) =>
         data.forEach((elem) => {
           if (elem.id === props.activeUserId) {
-            toggleContacts(elem.contacts);
+            dispatch(contactsListAction(elem.contacts));
           }
         })
       );
@@ -61,8 +65,16 @@ function deleteContact() {
 }
 
   function editContact(id){
-    setEditContact(true);
-    setSelectedContactEdit(id)
+    dispatch(contactEditTrueAction());
+    dispatch(selectedContactEditTrueAction(id))
+  }
+
+
+
+  function selectCheckbox(e){
+    Array.from(document.querySelectorAll('.contacts__list-checkbox')).forEach((el, index) => {
+      index == e.target.dataset.id ? el.checked = !el.checked : el.checked = false
+    })
   }
 
 
@@ -71,7 +83,7 @@ function deleteContact() {
       {contact ? (
         <AddContact
           activeUserId={props.activeUserId}
-          addContact={addContact}
+          addContact={dispatch}
           getData={getData}
         />
       ) : (
@@ -81,7 +93,7 @@ function deleteContact() {
         <EditContact
             selectedContactEdit={selectedContactEdit}
             activeUserId={props.activeUserId}
-            setEditContact={setEditContact}
+            setEditContact={dispatch}
             getData={getData}
             />
       ) : (
@@ -110,8 +122,8 @@ function deleteContact() {
               return (
                 <div key={id} className="contacts__list-row">
                   <div className="contacts__list-checkbox_wrapper contacts__list-item">
-                    <input id="contact_checkbox" className="contacts__list-checkbox" type="checkbox" />
-                    <label htmlFor="contact_checkbox" className="contacts__list-label" type="checkbox" />
+                    <input onChange={e => e.preventDefault()} id="contact_checkbox" className="contacts__list-checkbox" type="checkbox" />
+                    <label onClick={selectCheckbox} data-id={id} htmlFor="contact_checkbox" className="contacts__list-label" type="checkbox" />
                   </div>
                   <div className="contacts__list-name contacts__list-item">
                     {contact.name}
@@ -166,7 +178,7 @@ function deleteContact() {
             <div onClick={deleteContact} className="delete_contact-button">
               Delete contact
           </div>
-            <div onClick={() => addContact(true)} className="add_contact-button">
+            <div onClick={() => dispatch(activeAddContactAction())} className="add_contact-button">
               Add contact
             </div>
           </div>
